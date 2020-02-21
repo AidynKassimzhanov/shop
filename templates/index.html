@@ -44,16 +44,22 @@
 	  </nav>
 
 	<div class="jumbotron">
-		<h1>Welcome to Django!</h1>
+		<h1>Добро пожаловать дорогие клиенты, перед вами список автомобилей!</h1>
 	</div>
 
 	<div class="container">
-		{% if people.count > 0 %}
-		    <h2>Список пользователей</h2>
+		{% if cars.count > 0 %}
+		    <h2>Список автомобилей</h2>
 		    <table class="table">
-		        <tr><th>Id</th><th>Имя</th><th>Возраст</th></tr>
-		        {% for person in people %}
-		        <tr><td>{{ person.id }}</td><td>{{ person.login }}</td><td>{{ person.password }}</td></tr>
+		        <tr><th>Id</th><th>Марка</th><th>Модель</th><th>Объем двигателя</th><th>Тип кузова</th></tr>
+		        {% for car in cars %}
+				<tr>
+					<td>{{ car.id }}</td>
+					<td>{{ car.brandCar }}</td>
+					<td>{{ car.modelCar }}</td>
+					<td>{{ car.volume }}</td>
+					<td>{{ car.body }}</td>
+				</tr>
 		        {% endfor %}
 		    </table>
 		    <input type="button" class="btn btn-danger" value="OK">
