@@ -53,3 +53,32 @@ class Avto(models.Model):
     class Meta:
         verbose_name = "Тип авто"
         verbose_name_plural = "Автомобили"
+
+class Categories(models.Model):
+    name = models.CharField(max_length=50)
+    parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, related_name='children', blank=True)
+        
+    def __str__(self):
+        return '%s, %s' % (self.parent, self.name)
+    
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
+
+class Product(models.Model):
+    name = models.CharField(max_length=50)
+    serial = models.CharField(max_length=50)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    description = models.TextField()
+    category = models.ForeignKey('Categories', verbose_name="категория товара", on_delete=models.SET_NULL, null=True)
+    avto = models.ManyToManyField('Avto')
+    count = models.PositiveSmallIntegerField("количество в наличии", default=0)
+    data = models.DateTimeField(auto_now_add=True, auto_now=False)
+    is_new = models.PositiveSmallIntegerField(default=0)
+        
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = "Автозапчасти"
+        verbose_name_plural = "Список запчастей"

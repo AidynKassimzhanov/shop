@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{% block title %} Welcome! {% endblock title %}
+
+{% block content %} 
+	<div class="jumbotron">
+		<h1>Добро пожаловать дорогие клиенты, перед вами список автомобилей!</h1>
+	</div>
+
+	<div class="container">
+		{% if cars.count > 0 %}
+		    <h2>Список автомобилей</h2>
+		    <table class="table">
+		        <tr><th>Id</th><th>Марка</th><th>Модель</th><th>Объем двигателя</th><th>Тип кузова</th></tr>
+		        {% for car in cars %}
+				<tr>
+					<td>{{ car.id }}</td>
+					<td>{{ car.brandCar }}</td>
+					<td>{{ car.modelCar }}</td>
+					<td>{{ car.volume }}</td>
+					<td>{{ car.body }}</td>
+				</tr>
+		        {% endfor %}
+		    </table>
+		    <input type="button" class="btn btn-danger" value="OK">
+	    {% endif %}
+	</div>
+
+{% endblock content %}
